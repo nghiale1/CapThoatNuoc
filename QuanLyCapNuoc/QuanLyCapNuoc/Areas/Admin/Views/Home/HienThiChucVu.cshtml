@@ -1,0 +1,59 @@
+﻿@model List<Model.EF.chucvu>
+@{
+    ViewBag.Title = "HienThiChucVu";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    //List<Model.EF.chucvu> loai = ViewData["list"] as List<Model.EF.chucvu>;
+}
+@section header{
+    Trang Chức Vụ
+}
+    
+    <div class="col-12">
+        <h3 class="card-title">
+            <a href="@Url.Action("CreateChucVu","Home")" class="btn btn-info">Thêm Chức Vụ</a>
+        </h3>
+        <div class="card">
+
+            
+            <!-- /.card-header -->
+            <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                    <thead>
+                        <tr>
+
+                            <th>ID Chức Vụ</th>
+                            <th>Tên Chức Vụ</th>
+                            <th>Thao Tác</th>
+
+                        </tr>
+                    </thead>
+                    <tbody id="category_table">
+                        @foreach (Model.EF.chucvu item in Model)
+                        {
+                            <tr id="@item.cv_id">
+                                <td>
+                                    @item.cv_id
+                                </td>
+                                <td>
+                                    @item.cv_ten
+                                </td>
+                                <td>
+                                    <a href="/Admin/Home/EditChucVu/@item.cv_id" class="btn btn-primary">Sửa</a>
+                                    @Ajax.ActionLink("Xóa","DeleteChucVu",new { @id = item.cv_id }, new AjaxOptions
+                                {
+                                   Confirm = "Bạn có muốn xóa?",
+                                   OnComplete = "$('#"+@item.cv_id+"').remove()",
+                                   HttpMethod = "DeleteChucVu"
+                                })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+
+                </table>
+
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>

@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@section header{
+    Chào mừng đến với Hệ Thống Quản Lý Cấp Thoát Nước
+
+
+}
+
+@if(Session[QuanLyCapNuoc.common.CommonConstants.NV_ID] != null)
+{
+   var a =Session[QuanLyCapNuoc.common.CommonConstants.NV_ID];
+    <p>Nhân Viên ID : @a</p> 
+}    

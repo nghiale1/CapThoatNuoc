@@ -1,0 +1,76 @@
+﻿
+@{
+    ViewBag.Title = "StatisticSubmit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+
+    List<Model.EF.lotrinh> lt = ViewData["lt"] as List<Model.EF.lotrinh>;
+    List<Model.EF.kyghi> kg = ViewData["kg"] as List<Model.EF.kyghi>;
+
+
+    List<SelectListItem> listlt = new List<SelectListItem>();
+    listlt.Add(new SelectListItem
+    {
+        Text = "Tất cả",
+        Value = "0"
+    });
+    foreach (var item in lt)
+    {
+        listlt.Add(new SelectListItem
+        {
+            Text = item.lt_ten,
+            Value = item.lt_id.ToString()
+        });
+
+    }
+
+    List<SelectListItem> listkg = new List<SelectListItem>();
+    listkg.Add(new SelectListItem
+    {
+        Text = "Tất cả",
+        Value = "0"
+    });
+    foreach (var item2 in kg)
+    {
+        listkg.Add(new SelectListItem
+        {
+            Text = item2.k_ten,
+            Value = item2.k_id.ToString()
+        });
+
+    }
+}
+@section header{
+    <h2>Thống kê</h2>
+}
+@using (Html.BeginForm("StatisticSubmit", "Bill", FormMethod.Post))
+{
+    <table>
+        <tr>
+            <td><label>Lộ trình</label></td>
+            <td>
+                @Html.DropDownList("kyghi", new SelectList(listkg, "Value", "Text"), new { @class = "form-control" })
+                @*@Html.DropDownList("lotrinh", new SelectList(listlt, "Value", "Text"), new { @class = "form-control" })*@
+            </td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td><label>Kỳ ghi</label></td>
+            <td>
+                @Html.DropDownList("kyghi", new SelectList(listkg, "Value", "Text"), new { @class = "form-control" })
+            </td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td><button type="submit" class="btn btn-outline-primary">Thống kê</button></td>
+        </tr>
+
+    </table>
+    <table>
+        <tr>
+            <thead></thead>
+        </tr>
+    </table>
+    
+}
+@section Script{
+    <script>
+
+    </script>
+    }
+

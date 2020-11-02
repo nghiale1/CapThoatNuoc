@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@model Model.EF.nganhang
+@section header{
+    <h2>Chỉnh sửa thông tin ngân hàng</h2>
+}
+
+<br />
+@using (Html.BeginForm("Update", "Bank", FormMethod.Post))
+{
+    <div class="styled-input agile-styled-input-top">
+        @Html.TextBoxFor(t => Model.nh_id, htmlAttributes: new { @class = "form-control", placeholder = "id ngân hàng", required = "required", style = "display: none;" })
+        @Html.TextBoxFor(t => Model.nh_ma, htmlAttributes: new { @class = "form-control", placeholder = "Mã ngân hàng", required = "required" })
+        <br />
+        @Html.TextBoxFor(t => Model.nh_ten, htmlAttributes: new { @class = "form-control", placeholder = "Tên ngân hàng", required = "required" })
+    </div>
+    <br />
+    <a href="javascript:void(0);" onclick="history.go(-1);" class="btn btn-secondary">Trở lại</a>
+    <button type="submit" class="btn btn-success">Lưu</button>
+}
+
+<div class="clearfix"></div>
+
+

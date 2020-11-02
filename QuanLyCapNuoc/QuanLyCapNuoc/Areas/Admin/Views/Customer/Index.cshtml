@@ -1,0 +1,98 @@
+﻿@model PagedList.IPagedList<Model.EF.khachhang>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section header{
+    Quản lý Khách Hàng
+}
+@section jsFooter{
+    <script src="~/Assets/Admin/js/controller/CustomerController.js"></script>
+}
+<div class="card mb-4">
+    <div class="panel-body">
+        @using (Html.BeginForm("Index", "Customer", FormMethod.Get))
+        {
+            <div class="row form-group">
+                <div class="col-lg-12">
+                    <div class="col-md-4">
+                        <input type="text" value="@ViewBag.SearchString" class="form-control" name="searchString" id="searchString" placeholder="Nhập họ tên hoặc mã khách hàng...">
+                    </div>
+                    <div class="col-md-4">
+                        <button type="submit" class="btn btn-success">Tìm kiếm</button>
+                        <a class="btn btn-primary" href="/Admin/Customer/Create">Thêm mới</a>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>MÃ KHÁCH HÀNG</th>
+                            <th>HỌ VÀ TÊN</th>
+                            <th>LOẠI KHÁCH HÀNG</th>
+                            <th>LỘ TRÌNH</th>
+                            <th>ĐỊA CHỈ LẮP ĐẶT</th>
+                            <th>ĐỊA CHỈ THANH TOÁN</th>
+                            <th>SỐ TÀI KHOẢN</th>
+                            <th>NGÂN HÀNG</th>
+                            <th>MÃ SỐ THUẾ</th>
+                            <th>TRẠNG THÁI</th>
+                            <th>SỬA</th>
+                            @*<th>XÓA</th>*@
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>MÃ KHÁCH HÀNG</th>
+                            <th>HỌ VÀ TÊN</th>
+                            <th>LOẠI KHÁCH HÀNG</th>
+                            <th>LỘ TRÌNH</th>
+                            <th>ĐỊA CHỈ LẮP ĐẶT</th>
+                            <th>ĐỊA CHỈ THANH TOÁN</th>
+                            <th>SỐ TÀI KHOẢN</th>
+                            <th>NGÂN HÀNG</th>
+                            <th>MÃ SỐ THUẾ</th>
+                            <th>TRẠNG THÁI</th>
+                            <th>SỬA</th>
+                            @*<th>XÓA</th>*@
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr id=" row_@item.kh_id">
+
+                                <td>@item.kh_id</td>
+                                <td>@item.kh_hoten</td>
+                                <td>@item.loaikhachhang.lkh_ten</td>
+                                <td>@item.lotrinh.lt_ten</td>
+                                <td>@item.kh_diachilapdat</td>
+                                <td>@item.kh_diachithanhtoan</td>
+                                <td>@item.kh_stk</td>
+                                <td>@item.nganhang.nh_ten</td>
+                                <td>@item.kh_masothue</td>
+                                <td><a href="#" class="btn-active" data-id="@item.kh_id">@Html.Raw(item.kh_trangthai ? "<strong>Kích hoạt</strong>" : "Khoá")</a></td>
+                                <td><a href="/Admin/Customer/Edit/@item.kh_id" class="glyphicon-pencil"><i class="fas fa-edit"></i></a></td>
+                                @*<td>
+                                         @Ajax.ActionLink("Xoá", "Delete", new { @id = item.kh_id }, new AjaxOptions
+                                    {
+                                        Confirm = "Bạn có muốn xóa khách hàng này???",
+                                        OnComplete = "$('#row_" + @item.kh_id + "').remove()",
+                                        HttpMethod = "Delete"
+                                    })
+                                     </td>*@
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page, @searchString = @ViewBag.SearchString }))
+            </div>
+        </div>
+    </div>
+</div>

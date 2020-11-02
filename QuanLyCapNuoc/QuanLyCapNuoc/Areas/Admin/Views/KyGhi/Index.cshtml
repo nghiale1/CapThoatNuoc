@@ -1,0 +1,82 @@
+﻿@model PagedList.IPagedList<Model.EF.kyghi>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section header{
+
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="/Admin/KyGhi/Index">Kỳ Ghi</a></li>
+        <li class="breadcrumb-item active">Danh sách</li>
+    </ol>
+}
+<div class="card mb-4">
+    <div class="card-header">
+        <a class=" btn btn-success" href="/Admin/KyGhi/Create">
+            <i class="fas fa-plus"></i>
+            Thêm kỳ ghi mới
+        </a> &emsp;
+    
+        <a class=" btn btn-primary" href="/Admin/Chiso/Index">
+            <i class="fas fa-edit"></i>
+            Ghi Chỉ Số Nước
+        </a>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>ID KỲ Ghi</th>
+                        <th>Nhân Viên ID</th>
+                        <th>Tên Nhân Viên</th>
+                        <th>tên Kì Ghi</th>
+                        <th>Ngày Bắt đầu</th>
+                        <th>sửa</th>
+                        <th>Xóa</th>
+
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nhân Viên ID</th>
+                        <th>Tên Nhân Viên</th>
+                        <th>tên Kì Ghi</th>
+                        <th>Ngày Bắt đầu</th>
+                        <th>sửa</th>
+                        <th>Xóa</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+
+                    @foreach (var i in Model)
+                    {
+                        <tr>
+                            <td>@i.k_id</td>
+                            <td>@i.nv_id</td>
+                            <td>@i.nhanvien.nv_hoten</td>
+                            <td>@i.k_ten</td>
+                            <td>@i.k_ngaybatdau</td>
+
+                            <td><a class="btn btn-warning" href="/Admin/KyGhi/Edit/@i.k_id">Sửa</a></td>
+
+                            <td>
+                                <form action="/Admin/KyGhi/Delete/@i.k_id" method="post">
+                                    <input class="btn btn-danger" type="submit" value="Xóa" />
+                                </form>
+                            </td>
+
+                        </tr>
+                    }
+
+
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

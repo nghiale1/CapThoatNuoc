@@ -1,0 +1,77 @@
+﻿@model PagedList.IPagedList<Model.EF.lotrinh>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section header{
+
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="index.html">Lộ Trình</a></li>
+        <li class="breadcrumb-item active">Danh sách</li>
+    </ol>
+}
+<div class="card mb-4">
+    <div class="card-header">
+        <a class=" btn btn-success" href="/Admin/LoTrinh/Create">
+            <i class="fas fa-plus"></i>
+            Thêm Lộ trình mới
+        </a>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>ID Lộ Trình</th>
+                        <th>Khu Vực ID</th>
+                        <th>Nhân Viên ID</th>
+                        <th>Tên Lộ Trình</th>
+                        <th>Ghi chú lộ trình</th>
+                        <th>sửa</th>
+                        <th>Xóa</th>
+
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>ID Lộ Trình</th>
+                        <th>Khu Vực ID</th>
+                        <th>Nhân Viên ID</th>
+                        <th>Tên Lộ Trình</th>
+                        <th>Ghi chú lộ trình</th>
+                        <th>sửa</th>
+                        <th>Xóa</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+
+                    @foreach (var i in Model)
+                    {
+                        <tr>
+                            <td>@i.lt_id</td>
+                            <td>@i.khuvuc.kv_ten _ @i.khuvuc.phuong.p_ten _ @i.khuvuc.phuong.quan.q_ten _ TP.@i.khuvuc.phuong.quan.tinh.t_ten</td>
+                            <td>@i.nv_id</td>
+                            <td>@i.lt_ten</td>
+                            <td>@i.lt_ghichu</td>
+
+                            <td><a class="btn btn-warning" href="/Admin/LoTrinh/Edit/@i.lt_id">Sửa</a></td>
+
+                            <td>
+                                <form action="/Admin/LoTrinh/Delete/@i.lt_id" method="post">
+                                    <input class="btn btn-danger" type="submit" value="Xóa" />
+                                </form>
+                            </td>
+
+                        </tr>
+                    }
+
+
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

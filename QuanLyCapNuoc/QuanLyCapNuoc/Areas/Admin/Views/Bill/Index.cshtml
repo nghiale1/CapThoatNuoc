@@ -1,0 +1,76 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@section header{
+    <h2>Hóa đơn</h2>}
+@{
+    var error = TempData["ModelErrors"];
+    List<SelectListItem> listItems = new List<SelectListItem>();
+    listItems.Add(new SelectListItem
+    {
+        Text = "Kỳ 1",
+        Value = "1"
+    });
+    listItems.Add(new SelectListItem
+    {
+        Text = "Kỳ 2",
+        Value = "2"
+    });
+    listItems.Add(new SelectListItem
+    {
+        Text = "Kỳ 3",
+        Value = "3"
+    });
+    listItems.Add(new SelectListItem
+    {
+        Text = "Tất cả",
+        Value = "4"
+    });
+}
+
+@section Style{
+    <style>
+    </style>
+}
+@using (Html.BeginForm("Show", "Bill", FormMethod.Get))
+{
+    <div class="row form-group">
+        <div class="col-lg-12">
+            <div class="col-md-4" style="float:left">
+                <input type="number" value="@ViewBag.SearchString" class="form-control" name="hd_id" id="hd_id" placeholder="Nhập mã hóa đơn...">
+
+            </div>
+            <div class="col-md-4" style="float:left">
+                <button type="submit" class="btn btn-success">Tìm kiếm</button>
+            </div>
+        </div>
+    </div>
+}
+<br />
+<br />
+<h1 class="text-center">Nhập mã lộ trình</h1>
+<p style="border-top: 2px solid blue;"></p>
+@if (error != null)
+{
+    <span style="margin-bottom:5px; display:block; height:25px; color:red;">@error</span>
+}
+@using (Html.BeginForm("ListBill", "Bill", FormMethod.Get))
+{
+    <div class="form-group row">
+        <div class="col-md-1">
+
+        </div>
+
+        <label class="col-md-2">Mã lộ trình</label>
+        <div class="col-md-4">
+            @Html.TextBox("lt_ten", null, htmlAttributes: new { @class = "form-control", required = "required" })
+        </div>
+        <div class="col-md-4">
+
+            <button type="submit" class="btn btn-success ">Chọn</button>
+        </div>
+    </div>
+}
+

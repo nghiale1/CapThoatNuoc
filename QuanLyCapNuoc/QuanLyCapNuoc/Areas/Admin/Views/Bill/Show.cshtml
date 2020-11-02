@@ -1,0 +1,172 @@
+﻿
+@{
+    ViewBag.Title = "Show";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@section Style{
+    <style>
+        .bill-name {
+            text-transform: uppercase;
+            color: red;
+            font-weight: 600;
+            text-align: center;
+            font-size: 20px;
+        }
+
+        .bill-info {
+            text-transform: uppercase;
+            font-weight: 500;
+            text-align: justify;
+            font-size: 15px;
+        }
+    </style>
+}
+@section header{
+    <h2>Chi tiết hóa đơn</h2>
+}
+@model Model.ViewModel.BillViewModel
+@{
+//Model.k_ngaybatdau = Model.k_ngaybatdau.Value;
+}
+<div class="container">
+    @if (ViewBag.status == false)
+    {
+        <h2>Không tìm thấy</h2>
+    }
+    else
+    {
+
+
+
+    <div style="border:1px solid black">
+        <div class="p-4">
+            <div class="row">
+                <div class="col-md-4 bill-info">
+                    <p>
+                        tổng CTY cấp thoát nước Cần Thơ - TNHH MTV Công ty Cấp nước Cần thơ
+                        Số 123, 30/4, Ninh Kiểu, Cần Thơ
+                        SDT:11111111  - FAX: 11111111
+                        Mã Số Thuế: 11111111
+                    </p>
+                </div>
+                <div class="col-md-4 bill-name">
+                    Hóa đơn giá trị gia tăng <br />
+                    (Tiền nước)
+                </div>
+                <div class="col-md-4">
+                    <p>Mẫu số:11111111</p>
+                    <p>Ký hiệu:11111111</p>
+                    <p>Số:@Model.hd_id</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <table>
+
+                        <tr>
+                            <td>MDB: </td>
+                            <td>@Model.lkh_ten@Model.kh_id</td>
+                        </tr>
+                        <tr>
+                            <td>MLT: </td>
+                            <td>@Model.lt_ten</td>
+                        </tr>
+                        <tr>
+                            <td>Thời gian sử dụng:</td>
+                            <td>@(Model.k_ngaybatdau.Value.ToString("dd/MM/yyyy")) - @(Model.k_ngaybatdau.Value.AddMonths(1).ToString("dd/MM/yyyy"))</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="col-md-6">
+                    <table>
+                        <tr>
+                            <td>Tên Khách hàng: </td>
+                            <td>@Model.kh_hoten</td>
+                        </tr>
+                        <tr>
+                            <td>Địa chỉ: </td>
+                            <td>@Model.kh_diachilapdat</td>
+                        </tr>
+                        <tr>
+                            <td>Mã số thuế: </td>
+                            <td>@Model.kh_mst</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <table class="table table-bordered ">
+                <tr class="text-md-center">
+                    <th>CHỈ SỐ <br />THÁNG @(Model.k_ngaybatdau.Value.AddMonths(-1).ToString("MM")) </th>
+                    <th>CHỈ SỐ <br />THÁNG TRƯỚC</th>
+                    <th>CHỈ SỐ <br />THÁNG NÀY</th>
+                    <th>TỔNG TIÊU THỤ <br />(m<sup>2</sup>)</th>
+                    <th>ĐƠN GIÁ <br />(đ)</th>
+                    <th>THÀNH TIỀN</th>
+                </tr>
+                <tr class="text-md-center">
+                    <td>@String.Format("{0:n0}", Model.hd_chisokytruoc2)</td>
+                    <td>@String.Format("{0:n0}",Model.hd_chisokytruoc1)</td>
+                    <td>@String.Format("{0:n0}",Model.hd_chiso)</td>
+                    <td>@String.Format("{0:n0}",Model.hd_luongtieuthu)</td>
+                    <td>@String.Format("{0:n0}", Model.hd_dongia)</td>
+                    <td>@String.Format("{0:n0}", Math.Round((Model.hd_tongtien / 1.2).Value, 2))</td>
+                </tr>
+                <tr>
+                    <td colspan="6" class="font-weight-bold">Cộng tiền: <span class="float-md-right">@String.Format("{0:n0}", Math.Round(Convert.ToDecimal((Model.hd_tongtien / 1.2)), 0))</span></td>
+                </tr>
+                <tr>
+                    <td colspan="6" class="font-weight-bold">Thuế suất GTGT 10%:<span class="float-md-right">@String.Format("{0:n0}", (Model.hd_tongtien/12))</span></td>
+                </tr>
+                <tr>
+                    <td colspan="6" class="font-weight-bold">Phí bảo vệ môi trường với NTSH 10%: <span class="float-md-right">@String.Format("{0:n0}", (Model.hd_tongtien/12))</span></td>
+                </tr>
+                <tr>
+                    <td colspan="6" class="font-weight-bold">
+                        Tổng cộng tiền thanh toán: <span class="float-md-right">@String.Format("{0:n0}", Model.hd_tongtien)</span><br /><br /><br />
+                        Số tiền viết bằng chữ: <span class="text-capitalize float-md-right">@ViewData["bangChu"]</span><br /><br /><br />
+                        Trạng thái: <span class="float-md-right">
+                            @if (Model.hd_trangthai == false)
+            {
+                                <bold>Chưa đóng</bold>
+                            }
+                            else
+                            {
+                                <bold>Đã đóng</bold>
+                            }
+                        </span><br /><br /><br />
+
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <br />
+    if (Model.hd_trangthai == false)
+    {
+        using (Html.BeginForm("Paid", "Bill", FormMethod.Post))
+        {
+            <div class="styled-input agile-styled-input-top">
+                @Html.TextBoxFor(t => Model.hd_id, htmlAttributes: new { @class = "form-control", required = "required", style = "display: none;readonly" })
+            </div>
+            <br />
+            <button type="submit" class="btn btn-success float-md-right paid ">Đã đóng</button>
+        }
+    }
+            <a href="javascript:void(0);" onclick="history.go(-1);" class="btn btn-secondary float-md-right mr-2">Trở lại</a>
+}
+    </div>
+@section Script{
+    <script>
+        $('.paid').on('click', function () {
+            if (confirm('Bạn đã thu tiền chưa?')) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        });
+
+    </script>
+}
+

@@ -1,0 +1,40 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Dashboard - SB Admin</title>
+    @RenderPage("~/Areas/Admin/Views/Shared/_Style.cshtml")
+</head>
+
+<body class="sb-nav-fixed">
+    <div id="layoutError">
+        <div id="layoutError_content">
+            <main>
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-6">
+                            <div class="text-center mt-4">
+                                <h1 class="display-1">500</h1>
+                                <p class="lead">Internal Server Error</p>
+                                <a href="javascript:void(0);" onclick="history.go(-1);">
+                                    <i class="fas fa-arrow-left mr-1"></i>
+                                    Trở lại
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        @RenderPage("~/Areas/Admin/Views/Shared/_Footer.cshtml")
+        @RenderPage("~/Areas/Admin/Views/Shared/_Script.cshtml")
+</body>
+
+</html>

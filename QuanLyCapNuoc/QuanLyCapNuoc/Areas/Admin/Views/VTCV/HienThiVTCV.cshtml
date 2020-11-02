@@ -1,0 +1,71 @@
+﻿@model List<Model.EF.vt_cv>
+@{
+    ViewBag.Title = "HienThiVTCV";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section header{
+    Trang Vai Trò - Chức Vụ
+}
+
+<div class="col-12">
+    <h3 class="card-title">
+        <a href="@Url.Action("CreateVTCV","VTCV")" class="btn btn-info">Thêm Vai Trò - Chức Vụ</a>
+    </h3>
+    <div class="card">
+
+        <div class="card-header">
+            <div class="form-group ml-1 mr-1">
+
+                <input type="text" class="form-control" name="search" id="search" placeholder="Nhập tên">
+            </div>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body table-responsive p-0">
+            <table class="table table-hover text-nowrap">
+                <thead>
+                    <tr>
+
+                        <th>ID Chức Vụ</th>
+                        <th>ID Vai Trò</th>
+                        <th>Ghi Chú</th>
+                        <th>Thao Tác</th>
+
+                    </tr>
+                </thead>
+                
+                <tbody id="category_table">
+                    @foreach (Model.EF.vt_cv item in Model)
+                    {
+                        <tr id="@item.vt_id@item.cv_id">
+                            <td>
+                                @item.cv_id
+                            </td>
+                            <td>
+                                @item.vt_id
+                            </td>
+                            <td>
+                                @item.vtcv_ghichu
+                            </td>
+                            <td>
+                                <a href="/Admin/VTCV/EditVTCV?idVT=@item.vt_id&idCV=@item.cv_id" class="btn btn-primary">Sửa</a>
+                                @Ajax.ActionLink("Xóa", "DeleteVTCV", new { @idVT = item.vt_id, @idCV = item.cv_id }, new AjaxOptions
+                           {
+                               Confirm = "Bạn có muốn xóa?",
+                               OnComplete = "$('#" + @item.vt_id + @item.cv_id + "').remove()",
+                               HttpMethod = "DeleteVTCV"
+                           })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+</div>
+
+

@@ -1,0 +1,71 @@
+﻿@model Model.EF.kythu
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section header{
+
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="/Admin/KyThu/Index">Kỳ Thu</a></li>
+        <li class="breadcrumb-item active">Tạo Mới</li>
+    </ol>
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.k_id, "Nhập ID kỳ ghi", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.k_id, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.k_id, "( 123 )", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.kt_lanthu, "Lần Thu Thứ", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.kt_lanthu, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.kt_lanthu, "( 1 )", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.kt_ngaythu, "Nhập Ngày Thu", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.kt_ngaythu, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.kt_ngaythu, "( 2020-10-10 10:10:00 )", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.kt_trangthai, "Trạng Thái thu Tiền", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select class="form-control" id="kt_trangthai" name="kt_trangthai">
+                    
+                        <option value="0">Chưa Thu</option>
+                        <option value="1">Đã Thu</option>
+                    
+                </select>
+
+                @* @Html.EditorFor(model => model.kt_trangthai, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.kt_trangthai, "( 0 là chưa thu , 1 là đã thu )", new { @class = "text-danger" })*@
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Tạo Mới" class="btn btn-primary btn-block" />
+            </div>
+        </div>
+    </div>
+}
+
+

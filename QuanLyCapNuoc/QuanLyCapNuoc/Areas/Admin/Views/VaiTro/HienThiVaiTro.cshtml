@@ -1,0 +1,59 @@
+﻿@model List<Model.EF.vaitro>
+@{
+    ViewBag.Title = "HienThiVaiTro";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    //List<Model.EF.ChucVu> loai = ViewData["list"] as List<Model.EF.ChucVu>;
+}
+@section header{
+    Trang Vai Trò
+}
+
+<div class="col-12">
+    @*<h3 class="card-title">
+        <a href="@Url.Action("Createvaitro","VaiTro")" class="btn btn-info">Thêm Vai Trò</a>
+    </h3>*@
+    <div class="card">
+
+        
+        <!-- /.card-header -->
+        <div class="card-body table-responsive p-0">
+            <table class="table table-hover text-nowrap">
+                <thead>
+                    <tr>
+
+                        <th>ID Vai Trò</th>
+                        <th>Tên Vai Trò</th>
+                        <th>Thao Tác</th>
+
+                    </tr>
+                </thead>
+                <tbody id="category_table">
+                    @foreach (Model.EF.vaitro item in Model)
+                    {
+                        <tr id="@item.vt_id">
+                            <td>
+                                @item.vt_id
+                            </td>
+                            <td>
+                                @item.vt_ten
+                            </td>
+                            <td>
+                                <a href="/Admin/VaiTro/EditVaiTro/@item.vt_id" class="btn btn-primary">Sửa</a>
+                                @Ajax.ActionLink("Xóa", "DeleteVaiTro", new { @id = item.vt_id }, new AjaxOptions
+                            {
+                               Confirm = "Bạn có muốn xóa?",
+                               OnComplete = "$('#" + @item.vt_id + "').remove()",
+                               HttpMethod = "DeleteVaiTro"
+                            })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+</div>

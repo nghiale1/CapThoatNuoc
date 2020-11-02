@@ -1,0 +1,103 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@{
+    List<Model.EF.nganhang> loai = ViewData["list"] as List<Model.EF.nganhang>;
+    var error = TempData["ModelErrors"];
+    var success = TempData["ModelSuccess"];
+}
+@model Model.EF.nganhang
+@section header{
+    <h2>Danh sách ngân hàng</h2>
+}
+
+<div class="container">
+    <br />
+    <a href="" class="btn btn-success" data-toggle="modal" data-target="#create">Thêm </a>
+    <br />
+    <br />
+    @if (success != null)
+    {
+        <span style="margin-bottom:5px; display:block; height:25px; color:green;">@success</span>
+    }
+    @if (error != null)
+    {
+        <span style="margin-bottom:5px; display:block; height:25px; color:red;">@error</span>
+    }
+    <form action="/" method="post">
+
+
+        <table class="table table-noborder table-hover">
+            <tr>
+                <th>
+                    Mã Ngân hàng
+                </th>
+                <th>
+                    Tên ngân hàng
+                </th>
+
+                <th>Tác Vụ</th>
+            </tr>
+            @foreach (var item in loai)
+            {
+                <tr>
+                    <td>@item.nh_ma</td>
+                    <td>@item.nh_ten</td>
+
+                    <td>
+                        <a href="@Url.Action("Edit", "Bank",new { code = @item.nh_id })"><font color="orange"><i class="fas fa-user-edit"></i></font></a>
+                        &nbsp;&nbsp;
+                        <a href="@Url.Action("Destroy", "Bank",new { code = @item.nh_id })" class="delete"><font color="red"><i class="far fa-trash-alt"></i></font></a>
+                    </td>
+                </tr>
+            }
+
+
+        </table>
+    </form>
+    <a href="javascript:void(0);" onclick="history.go(-1);" class="btn btn-secondary">Trở lại</a>
+    <div class="modal fade" id="create" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-body">
+
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3 class="agileinfo_sign">Thêm ngân hàng</h3>
+                    <br />
+                    @using (Html.BeginForm("Store", "Bank", FormMethod.Post))
+                    {
+                        <div class="styled-input agile-styled-input-top">
+                            @Html.TextBoxFor(t => Model.nh_ma, htmlAttributes: new { @class = "form-control", placeholder = "Mã ngân hàng", required = "required" })
+                            <br />
+                            @Html.TextBoxFor(t => Model.nh_ten, htmlAttributes: new { @class = "form-control", placeholder = "Tên ngân hàng", required = "required" })
+                        </div>
+                        <br />
+
+                        <button type="submit" class="btn btn-success">Thêm</button>
+                    }
+
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <!-- //Modal content-->
+        </div>
+    </div>
+</div>
+@section Script{
+    <script>
+        $('.delete').on('click', function () {
+            if (confirm('Bạn có muốn xóa ngân hàng này?')) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        });
+
+    </script>
+}
+
+

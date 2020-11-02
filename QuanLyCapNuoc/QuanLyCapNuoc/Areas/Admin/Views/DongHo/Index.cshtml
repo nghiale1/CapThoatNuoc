@@ -1,0 +1,82 @@
+﻿@model PagedList.IPagedList<Model.EF.dongho>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section header{
+
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="/Admin/DongHo/Index">Đồng Hồ</a></li>
+        <li class="breadcrumb-item active">Danh Sách</li>
+    </ol>
+}
+<div class="card mb-4">
+    <div class="card-header">
+        <a class=" btn btn-success" href="/Admin/DongHo/Create">
+            <i class="fas fa-plus"></i>
+            Thêm Đồng Hồ mới
+        </a>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Mã khách hàng</th>
+                        <th>Tên Khách hàng</th>
+                        <th>thương hiệu</th>
+                        <th>mã số</th>
+                        <th>ngày lập</th>
+                        <th>ngày kiểm định</th>
+                        <th>sửa</th>
+                        <th>Xóa</th>
+
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>ID</th>
+                        <th>Mã khách hàng</th>
+                        <th>Tên Khách hàng</th>
+                        <th>thương hiệu</th>
+                        <th>mã số</th>
+                        <th>ngày lập</th>
+                        <th>ngày kiểm định</th>
+                        <th>sửa</th>
+                        <th>Xóa</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+
+                    @foreach (var i in Model)
+                    {
+                        <tr>
+                            <td>@i.dh_id</td>
+                            <td>@i.kh_id</td>
+                            <td>@i.khachhang.kh_hoten</td>
+                            <td>@i.dh_thuonghieu</td>
+                            <td>@i.dh_maso</td>
+                            <td>@i.dh_ngaylap</td>
+                            <td>@i.dh_ngaykiemdinh</td>
+                            <td><a class="btn btn-warning" href="/Admin/DongHo/Edit/@i.dh_id">Sửa</a></td>
+
+                            <td>
+                                <form action="/Admin/DongHo/Delete/@i.dh_id" method="post">
+                                    <input class="btn btn-danger" type="submit" value="Xóa" />
+                                </form>
+                            </td>
+
+                        </tr>
+                    }
+
+
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

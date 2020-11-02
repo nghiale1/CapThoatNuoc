@@ -1,0 +1,56 @@
+﻿@model PagedList.IPagedList<Model.EF.chiso>
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@section header{
+
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="/Admin/ChiSo/index">Chỉ Số</a></li>
+        <li class="breadcrumb-item active">Khách Hàng </li>
+    </ol>
+}
+<div class="card mb-4">
+    <div class="card-header">
+        
+        <i class="fas fa-align-justify"></i>
+        
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Kỳ Ghi</th>
+                        <th>Chỉ Số</th>
+                        <th>Sửa</th>
+
+
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Kỳ Ghi</th>
+                        <th>Chỉ Số</th>
+                        <th>Sửa</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+
+                    @foreach (var i in Model)
+                    {
+                        <tr>
+                            <td>@i.k_id</td>
+                            <td>@i.cs_chiso</td>
+                            <td><a class="btn btn-warning" href="/Admin/ChiSo/Edit?kh_id=@i.kh_id&k_id=@i.k_id">Sửa</a></td>
+                        </tr>
+                    }
+
+
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

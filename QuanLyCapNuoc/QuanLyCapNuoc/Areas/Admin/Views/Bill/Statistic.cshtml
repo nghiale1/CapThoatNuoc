@@ -1,0 +1,140 @@
+﻿
+@{
+    ViewBag.Title = "Statistic";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    List<Model.EF.lotrinh> lt = ViewData["lt"] as List<Model.EF.lotrinh>;
+    List<Model.EF.kyghi> kg = ViewData["kg"] as List<Model.EF.kyghi>;
+
+
+    List<SelectListItem> listlt = new List<SelectListItem>();
+    listlt.Add(new SelectListItem
+    {
+        Text = "Tất cả",
+        Value = "0"
+    });
+    foreach (var item in lt)
+    {
+        listlt.Add(new SelectListItem
+        {
+            Text = item.lt_ten,
+            Value = item.lt_id.ToString()
+        });
+
+    }
+
+    List<SelectListItem> listkg = new List<SelectListItem>();
+    listkg.Add(new SelectListItem
+    {
+        Text = "Tất cả",
+        Value = "0"
+    });
+    foreach (var item2 in kg)
+    {
+        listkg.Add(new SelectListItem
+        {
+            Text = item2.k_ten,
+            Value = item2.k_id.ToString()
+        });
+
+    }
+}
+@section header{
+    <h2>Thống kê</h2>
+}
+@using (Html.BeginForm("StatisticSubmit", "Bill", FormMethod.Post))
+{
+    <table>
+        <tr>
+            <td><label>Lộ trình</label></td>
+            <td>
+                <select name="lotrinh" id="lotrinh" class="form-control">
+                    <option value="0">Tất cả</option>
+                    @foreach (var item in lt)
+                    {
+                        <option value="@item.lt_id">@item.lt_ten</option>
+                    }
+                </select>
+                @*@Html.DropDownList("kyghi", new SelectList(listkg, "Value", "Text"), new { @class = "form-control" ,@id="lt"})*@
+                @*@Html.DropDownList("lotrinh", new SelectList(listlt, "Value", "Text"), new { @class = "form-control" })*@
+            </td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td><label>Kỳ ghi</label></td>
+            <td>
+                <select name="kyghi" id="kyghi" class="form-control">
+                    <option value="0">Tất cả</option>
+                    @foreach (var item in kg)
+                    {
+                        <option value="@item.k_id">@item.k_ten</option>
+                    }
+                </select>
+                @* @Html.DropDownList("kyghi", new SelectList(listkg, "Value", "Text"), new { @class = "form-control", @id = "kg" })*@
+            </td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td><button type="button" class="btn btn-outline-primary" id="btn_statistic">Thống kê</button></td>
+        </tr>
+
+    </table>
+    <br />
+    <br />
+    <div class="result"></div>
+    <br />
+    <br />
+    <canvas id="myChart" width="100" height="100"></canvas>
+
+}
+@section Script{
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(function () {
+            $("#btn_statistic").click(function () {
+                var lt = $('#lotrinh').val();
+                var kg = $('#kyghi').val();
+                $.ajax({
+                    url: "StatisticSubmit?lotrinh=" + lt + "&kyghi=" + kg,
+                    type: "GET",
+                    dataType: "json",
+                    success: function (result) {
+                        if (result == null) {
+                            alert("Không tìm thấy giá trị");
+                        }
+                        var html = '';
+                        html += "<table class='table table-bordered'>";
+                        html += '<thead>';
+                        html += '<tr>';
+                        html += '<th>Lộ trình</th>';
+                        html += '<th>Kỳ ghi</th>';
+                        html += '<th>Số hộ</th>';
+                        html += '<th>Số nước</th>';
+                        html += '<th>Tổng tiền</th>';
+                        html += '</tr>';
+                        html += '</thead>';
+                        html += '<tr>';
+                        if (result.k_ten == null) {
+                            html += '<td>Tất cả</td>';
+                        } else {
+                            html += '<td>' + result.k_ten + '</td>';
+                        }
+                        if (result.lt_ten == null) {
+                            html += '<td>Tất cả</td>';
+                        } else {
+                            html += '<td>' + result.lt_ten + '</td>';
+                        }
+                        html += '<td>' + parseFloat(result.soho).toLocaleString('en-US') + '</td>';
+                        html += '<td>' + parseFloat(result.sonuoc).toLocaleString('en-US') + '</td>';
+                        html += '<td>' + parseFloat(result.tongtien).toLocaleString('en-US') + '</td>';
+                        html += '</tr>';
+                        html += '</table>';
+                        $('.result').html(html);
+
+
+
+                    },
+                    error: function (errormessage) {
+                        alert("không tìm thấy dữ liệu");
+                    }
+                });
+            });
+        });
+    </script>
+}
+

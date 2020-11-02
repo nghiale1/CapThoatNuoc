@@ -1,0 +1,265 @@
+/*------------------------*/
+body {
+    /*font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;*/
+    color: #232323;
+    background-color: #fff;
+}
+
+header, footer, nav, section {
+    display: block;
+}
+
+
+/* Styles for basic forms
+-----------------------------------------------------------*/
+fieldset {
+    border: 1px solid #ddd;
+    padding: 0 1.4em 1.4em 1.4em;
+    margin: 0 0 1.5em 0;
+}
+
+legend {
+    /*font-size: 1.2em;
+    font-weight: bold;*/
+}
+
+textarea {
+    min-height: 75px;
+}
+
+.editor-label {
+    margin: 1em 0 0 0;
+}
+
+.editor-field {
+    margin: 0.5em 0 0 0;
+}
+
+
+/* Styles for validation helpers
+-----------------------------------------------------------*/
+.field-validation-error {
+    color: #f00;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+.input-validation-error {
+    border: 1px solid #f00;
+    background-color: #fee;
+}
+
+.validation-summary-errors {
+    /*font-weight: bold;*/
+    color: #f00;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+/*
+	loading layout
+*/
+#overlay {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    /*	opacity:0.1;
+	filter:alpha(opacity=10);*/
+    z-index: 1000;
+    display: none;
+}
+
+#preloader {
+    background: #000000 url(Images/loadder/preloader.gif) no-repeat 12px 10px;
+    /*font-size: 13px;*/
+    height: 40px;
+    left: 50%;
+    line-height: 20px;
+    margin: -20px 0 0 -45px;
+    padding: 10px;
+    position: fixed;
+    text-align: left;
+    text-indent: 36px;
+    top: 50%;
+    width: auto;
+    z-index: 1209;
+    opacity: 0.8;
+    filter: alpha(opacity=80);
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+    color: #FFF;
+    text-shadow: none;
+    display: none;
+}
+
+#pageload {
+    background: #000000;
+    /*font-size: 13px;*/
+    height: 40px;
+    left: 50%;
+    line-height: 20px;
+    margin: -20px 0 0 -55px;
+    padding: 10px;
+    position: fixed;
+    text-align: center;
+    top: 50%;
+    width: 120px;
+    z-index: 1006;
+    opacity: 0.8;
+    filter: alpha(opacity=80);
+    -moz-border-radius: 12px;
+    -webkit-border-radius: 12px;
+    border-radius: 12px;
+    color: #FFF;
+    text-shadow: none;
+    display: none;
+}
+
+@-webkit-keyframes blinker {
+    from {
+        opacity: 1.0;
+    }
+
+    to {
+        opacity: 0.0;
+    }
+}
+
+.css3-blink {
+    -webkit-animation-name: blinker;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: cubic-bezier(1.0,0,0,1.0);
+    -webkit-animation-duration: 1s;
+}
+
+.blink {
+    animation: blink 1s steps(5, start) infinite;
+    -webkit-animation: blink 1s steps(5, start) infinite;
+}
+
+@keyframes blink {
+    to {
+        visibility: hidden;
+    }
+}
+
+@-webkit-keyframes blink {
+    to {
+        visibility: hidden;
+    }
+}
+
+
+.textColor {
+    -webkit-animation: color-change 1s infinite;
+    -moz-animation: color-change 1s infinite;
+    -o-animation: color-change 1s infinite;
+    -ms-animation: color-change 1s infinite;
+    animation: color-change 1s infinite;
+}
+
+@-webkit-keyframes color-change {
+    0% {
+        color: red;
+    }
+
+    50% {
+        color: blue;
+    }
+
+    100% {
+        color: yellow;
+    }
+}
+
+@-moz-keyframes color-change {
+    0% {
+        color: red;
+    }
+
+    50% {
+        color: blue;
+    }
+
+    100% {
+        color: yellow;
+    }
+}
+
+@-ms-keyframes color-change {
+    0% {
+        color: red;
+    }
+
+    50% {
+        color: blue;
+    }
+
+    100% {
+        color: yellow;
+    }
+}
+
+@-o-keyframes color-change {
+    0% {
+        color: red;
+    }
+
+    50% {
+        color: blue;
+    }
+
+    100% {
+        color: yellow;
+    }
+}
+
+@keyframes color-change {
+    0% {
+        color: red;
+    }
+
+    50% {
+        color: blue;
+    }
+
+    100% {
+        color: yellow;
+    }
+}
+
+.table-responsive{overflow-x:auto;min-height:.01%;}
+@media screen  and (max-width:767px){.table-responsive{width:100%;margin-bottom:13.5px;overflow-y:hidden;-ms-overflow-style:-ms-autohiding-scrollbar;border:1px solid #6e6d6d;}
+.table-responsive>.table{margin-bottom:0;}
+.table-responsive>.table>thead>tr>th,.table-responsive>.table>tbody>tr>th,.table-responsive>.table>tfoot>tr>th,.table-responsive>.table>thead>tr>td,.table-responsive>.table>tbody>tr>td,.table-responsive>.table>tfoot>tr>td{white-space:nowrap;}
+.table-responsive>.table-bordered{border:0;}
+.table-responsive>.table-bordered>thead>tr>th:first-child,.table-responsive>.table-bordered>tbody>tr>th:first-child,.table-responsive>.table-bordered>tfoot>tr>th:first-child,.table-responsive>.table-bordered>thead>tr>td:first-child,.table-responsive>.table-bordered>tbody>tr>td:first-child,.table-responsive>.table-bordered>tfoot>tr>td:first-child{border-left:0;}
+.table-responsive>.table-bordered>thead>tr>th:last-child,.table-responsive>.table-bordered>tbody>tr>th:last-child,.table-responsive>.table-bordered>tfoot>tr>th:last-child,.table-responsive>.table-bordered>thead>tr>td:last-child,.table-responsive>.table-bordered>tbody>tr>td:last-child,.table-responsive>.table-bordered>tfoot>tr>td:last-child{border-right:0;}
+.table-responsive>.table-bordered>tbody>tr:last-child>th,.table-responsive>.table-bordered>tfoot>tr:last-child>th,.table-responsive>.table-bordered>tbody>tr:last-child>td,.table-responsive>.table-bordered>tfoot>tr:last-child>td{border-bottom:0;}
+}
+.table-noborder>tbody>tr>td, .table-noborder>tbody>tr>th, .table-noborder>tfoot>tr>td, .table-noborder>tfoot>tr>th, .table-noborder>thead>tr>td, .table-noborder>thead>tr>th {
+    border-top: 0px solid #ddd;
+}
+.table-hasheader .table > thead > tr > th, .table-hasheader .table > tbody > tr > th{background-color: #ceedfe;color: #0a64a4;}
+
+#lblUser{float:right;}
+.content-boxes-v6 img{width:100px; height:100px;}
+.header .topbar ul.loginbar li{font-size:15px !important;color:#000;}
+.content-info-detail p
+{
+    line-height:1.8;
+    margin:7px 0; color:#000;
+	text-align: justify;text-indent:24px;
+	font-size: 13px;
+}
+.content-info-detail ul li{color:#000;font-size: 13px;}
+.headline-lefts h4{color:#3498db;}
+.content-main p{line-height:1.8; margin:7px 0; color:#000 !important;}

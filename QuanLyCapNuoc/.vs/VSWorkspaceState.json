@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\Model",
+    "\\Model\\DAO",
+    "\\Model\\EF",
+    "\\QuanLyCapNuoc",
+    "\\QuanLyCapNuoc\\Areas",
+    "\\QuanLyCapNuoc\\Areas\\Admin",
+    "\\QuanLyCapNuoc\\Areas\\Admin\\Controllers",
+    "\\QuanLyCapNuoc\\Areas\\Admin\\Views",
+    "\\QuanLyCapNuoc\\Areas\\Admin\\Views\\Customer"
+  ],
+  "SelectedNode": "\\Model\\EF",
+  "PreviewInSolutionExplorer": false
+}
